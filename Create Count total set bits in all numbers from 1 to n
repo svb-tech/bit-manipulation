@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <math.h>
+int countSetBits(int n) {
+    if (n == 0) {
+        return 0;
+    }
+    int lastBitCount = n / 2;
+    int remainingBitsCount = countSetBits(n / 2);
+    return lastBitCount + remainingBitsCount + (n % 2); 
+}
+int main() {
+    int n;
+    printf("Enter a number (n): ");
+    scanf("%d", &n);
+    int totalSetBits = countSetBits(n);
+    printf("Total number of set bits in all numbers from 1 to %d: %d\n", n, totalSetBits);
+    return 0;
+}
