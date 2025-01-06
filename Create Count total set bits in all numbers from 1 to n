@@ -1,18 +1,35 @@
-#include <stdio.h>
-#include <math.h>
+#include <iostream>
+using namespace std;
+
 int countSetBits(int n) {
-    if (n == 0) {
-        return 0;
+    int count = 0;
+    while (n) {
+        count += n & 1;
+        n >>= 1;
     }
-    int lastBitCount = n / 2;
-    int remainingBitsCount = countSetBits(n / 2);
-    return lastBitCount + remainingBitsCount + (n % 2); 
+    return count;
 }
+
+int totalSetBits(int n) {
+    int total = 0;
+    for (int i = 1; i <= n; i++) {
+        total += countSetBits(i);
+    }
+    return total;
+}
+
 int main() {
     int n;
-    printf("Enter a number (n): ");
-    scanf("%d", &n);
-    int totalSetBits = countSetBits(n);
-    printf("Total number of set bits in all numbers from 1 to %d: %d\n", n, totalSetBits);
+    cout << "Enter a positive integer: ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Please enter a positive integer." << endl;
+        return 1;
+    }
+
+    int total = totalSetBits(n);
+    cout << "Total set bits from 1 to " << n << ": " << total << endl;
+
     return 0;
 }
